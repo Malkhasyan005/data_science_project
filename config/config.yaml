@@ -1,5 +1,5 @@
 data:
-  dataset_name: "Dingdong-Inc/FreshRetailNet-50K"
+  dataset: "../data/train.csv"
   cache_dir: "./data/cache"
   processed_dir: "./data/processed"
   target_column: "sale_amount"

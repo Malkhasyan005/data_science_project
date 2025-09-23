@@ -3,3 +3,4 @@ data
 __MACOSX
 .DS_Store
 __pycache__
+notebook
