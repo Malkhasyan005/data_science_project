@@ -1,0 +1,42 @@
+data:
+  dataset_name: "Dingdong-Inc/FreshRetailNet-50K"
+  cache_dir: "./data/cache"
+  processed_dir: "./data/processed"
+  target_column: "sale_amount"
+  datetime_column: "dt"
+  
+preprocessing:
+  # Feature engineering configuration
+  lag_periods: [1, 2, 3, 7, 14, 21]  # Hours to lag
+  rolling_windows: [6, 24, 168]      # 6h, 1day, 1week
+  seasonal_periods: [24, 168]        # Daily and weekly patterns
+  outlier_threshold: 3.0             # Z-score threshold
+  
+models:
+  baseline:
+    naive:
+      seasonal_period: 24
+    linear_regression:
+      alpha: 1.0
+      normalize: true
+    random_forest:
+      n_estimators: 100
+      max_depth: 10
+      random_state: 42
+      
+  advanced:
+    lstm:
+      hidden_size: 64
+      num_layers: 2
+      dropout: 0.2
+      sequence_length: 168  # 1 week
+      
+training:
+  test_size: 0.2
+  validation_size: 0.1
+  cv_folds: 5
+  random_state: 42
+  
+evaluation:
+  metrics: ["mae", "rmse", "mape", "bias"]
+  forecast_horizons: [1, 6, 24, 168]  # 1h, 6h, 1day, 1week
