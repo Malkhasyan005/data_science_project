@@ -13,8 +13,8 @@ from typing import Dict, Optional, Tuple
 import sys
 sys.path.append('src')
 
-from src.data_loader import FreshRetailDataLoader
-from src.feature_engineering import FeatureEngineer
+from src.data_processing.data_loader import FreshRetailDataLoader
+from src.data_processing.feature_engineering import FeatureEngineer
 from src.models.baseline.linear_models import LinearForecastingModel
 from src.models.baseline.tree_models import TreeForecastingModel
 from src.models.baseline.naive_models import NaiveForecaster
