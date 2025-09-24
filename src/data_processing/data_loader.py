@@ -8,7 +8,7 @@ from pathlib import Path
 import yaml
 
 # Set up logging to help students debug issues
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(filename='app.log', filemode="a", level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
 class FreshRetailDataLoader:
