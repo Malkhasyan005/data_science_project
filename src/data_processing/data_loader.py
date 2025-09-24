@@ -48,11 +48,17 @@ class FreshRetailDataLoader:
         and informative logging for production systems.
         """
         try:
-            self.train_data = pd.read_csv(self.data_config['dataset_train'])
-            self.train_eval = pd.read_csv(self.data_config['dataset_eval'])
+            self.train_data = pd.read_csv(self.data_config['dataset_train']).sample(frac=self.data_config["fracture"], random_state=42)  # Using a sample for faster loading during development
+            self.eval_data = pd.read_csv(self.data_config['dataset_eval']).sample(frac=self.data_config["fracture"], random_state=42)
+
             self.train_data[self.data_config['datetime_column']] = pd.to_datetime(self.train_data[self.data_config['datetime_column']])
-            self.train_eval[self.data_config['datetime_column']] = pd.to_datetime(self.train_eval[self.data_config['datetime_column']])
-            return self.train_data, self.train_eval
+            self.eval_data[self.data_config['datetime_column']] = pd.to_datetime(self.eval_data[self.data_config['datetime_column']])
+
+            logger.info(f"Successfully loaded:")
+            logger.info(f"  Training samples: {len(self.train_data):,}")
+            logger.info(f"  Evaluation samples: {len(self.eval_data):,}")
+
+            return self.train_data, self.eval_data
         except Exception as e:
             logger.error(f"Failed to load dataset: {e}")
             raise

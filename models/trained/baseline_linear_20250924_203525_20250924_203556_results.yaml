@@ -317,4 +317,4 @@ train_metrics:
   - *id001
   - !!binary |
     T3ocw9XUQkA=
-training_time_seconds: 9.840448
+training_time_seconds: 9.666555
