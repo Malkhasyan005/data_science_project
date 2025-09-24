@@ -22,7 +22,7 @@ class FreshRetailDataLoader:
     - Clear documentation
     """
     
-    def __init__(self, config_path = "../config/config.yaml"):
+    def __init__(self, config_path = "/home/karen/data_science_project/config/config.yaml"):
         """
         Initialize the data loader with configuration.
         
@@ -48,9 +48,11 @@ class FreshRetailDataLoader:
         and informative logging for production systems.
         """
         try:
-            df = pd.read_csv(self.data_config['dataset'])
-            df[self.data_config['datetime_column']] = pd.to_datetime(df[self.data_config['datetime_column']])
-            self.train_data = df
+            self.train_data = pd.read_csv(self.data_config['dataset_train'])
+            self.train_eval = pd.read_csv(self.data_config['dataset_eval'])
+            self.train_data[self.data_config['datetime_column']] = pd.to_datetime(self.train_data[self.data_config['datetime_column']])
+            self.train_eval[self.data_config['datetime_column']] = pd.to_datetime(self.train_eval[self.data_config['datetime_column']])
+            return self.train_data, self.train_eval
         except Exception as e:
             logger.error(f"Failed to load dataset: {e}")
             raise

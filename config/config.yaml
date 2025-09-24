@@ -1,5 +1,6 @@
 data:
-  dataset: "../data/train.csv"
+  dataset_train: "/home/karen/data_science_project/data/train.csv"
+  dataset_eval: "/home/karen/data_science_project/data/eval.csv"
   cache_dir: "./data/cache"
   processed_dir: "./data/processed"
   target_column: "sale_amount"
