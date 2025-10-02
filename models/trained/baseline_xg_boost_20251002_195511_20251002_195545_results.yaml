@@ -1,0 +1,420 @@
+eval_metrics:
+  Bias: !!python/object/apply:numpy._core.multiarray.scalar
+  - &id001 !!python/object/apply:numpy.dtype
+    args:
+    - f8
+    - false
+    - true
+    state: !!python/tuple
+    - 3
+    - <
+    - null
+    - null
+    - null
+    - -1
+    - -1
+    - 0
+  - !!binary |
+    VF8tjlGErb8=
+  Bias_Percentage: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id001
+  - !!binary |
+    PqJi3kE2E8A=
+  MAE: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id001
+  - !!binary |
+    lByhONFTvT8=
+  MAPE: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id001
+  - !!binary |
+    gXZWvAkIZ0E=
+  MASE: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id001
+  - !!binary |
+    AAAAAAAA+P8=
+  RMSE: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id001
+  - !!binary |
+    osh0aAYt5z8=
+  sMAPE: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id001
+  - !!binary |
+    OxDWOZMDKUA=
+feature_importance:
+  activity_flag: !!python/object/apply:numpy._core.multiarray.scalar
+  - &id002 !!python/object/apply:numpy.dtype
+    args:
+    - f4
+    - false
+    - true
+    state: !!python/tuple
+    - 3
+    - <
+    - null
+    - null
+    - null
+    - -1
+    - -1
+    - 0
+  - !!binary |
+    BnsCOw==
+  avg_humidity: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    mOyYOg==
+  avg_temperature: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    3/mQOg==
+  avg_wind_level: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    vL+bOg==
+  day_of_month: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    Cc02Ow==
+  day_of_week: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    HFsGPA==
+  day_of_week_cos: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    2FYCOw==
+  day_of_week_sin: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    2x3gOg==
+  days_since_start: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    R3oEPA==
+  discount: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    yHh3PA==
+  discount_evening: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    AAAAAA==
+  discount_weekend: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    0IgCPA==
+  first_category_id: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    O9r6Ow==
+  fourier_cos_168_1: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    XoE3Og==
+  fourier_cos_168_2: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    nTsrOg==
+  fourier_cos_168_3: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    3lGGOg==
+  fourier_cos_24_1: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    akFGOg==
+  fourier_cos_24_2: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    iXwtOg==
+  fourier_cos_24_3: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    U2IoOg==
+  fourier_sin_168_1: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    9SiGOg==
+  fourier_sin_168_2: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    BI0xOg==
+  fourier_sin_168_3: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    7OZlOg==
+  fourier_sin_24_1: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    R6sNOg==
+  fourier_sin_24_2: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    iFwuOg==
+  fourier_sin_24_3: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    aUogOg==
+  holiday_flag: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    632MPA==
+  hour: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    AAAAAA==
+  hour_cos: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    AAAAAA==
+  hour_sin: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    AAAAAA==
+  hours_since_start: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    1uXXOw==
+  hours_stock_status: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    AAAAAA==
+  is_evening_rush: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    AAAAAA==
+  is_holiday: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    IdaWOg==
+  is_late_night: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    AAAAAA==
+  is_lunch_time: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    AAAAAA==
+  is_morning_rush: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    AAAAAA==
+  is_weekday: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    AAAAAA==
+  is_weekend: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    AAAAAA==
+  management_group_id: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    oSEAOw==
+  month: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    IeJsOw==
+  month_cos: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    AAAAAA==
+  month_sin: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    xO21Ow==
+  precpt: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    OYWhOg==
+  product_avg_sales: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    CkqEPQ==
+  product_sales_volatility: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    qDAQPQ==
+  product_store_count: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    5OqhOw==
+  quarter: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    AAAAAA==
+  rain_weekend_interaction: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    rJV8Ow==
+  sale_amount_lag_1: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    /LIHOw==
+  sale_amount_lag_14: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    mWQ9Og==
+  sale_amount_lag_2: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    3kMSOw==
+  sale_amount_lag_21: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    AAAAAA==
+  sale_amount_lag_3: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    FZIZOw==
+  sale_amount_lag_7: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    Z/mEOg==
+  sale_amount_rolling_max_168: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    3I5BOw==
+  sale_amount_rolling_max_24: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    j6mYOw==
+  sale_amount_rolling_max_6: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    8QW6PA==
+  sale_amount_rolling_mean_168: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    DuFnPg==
+  sale_amount_rolling_mean_24: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    vKCmPQ==
+  sale_amount_rolling_mean_6: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    KhunPg==
+  sale_amount_rolling_median_168: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    W0Z1Og==
+  sale_amount_rolling_median_24: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    /GFpOw==
+  sale_amount_rolling_median_6: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    Q0WgOw==
+  sale_amount_rolling_std_168: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    8v6HPA==
+  sale_amount_rolling_std_24: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    UoZEPA==
+  sale_amount_rolling_std_6: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    MnuDOw==
+  second_category_id: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    SJ5vOw==
+  stock_hour6_22_cnt: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    Wy55PA==
+  stock_hour_interaction: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    AAAAAA==
+  stockout_lag_1: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    AAAAAA==
+  stockout_lag_2: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    AAAAAA==
+  stockout_lag_3: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    AAAAAA==
+  stockout_lag_7: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    AAAAAA==
+  stockout_ratio_7h: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    AAAAAA==
+  store_avg_sales: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    mepmOg==
+  store_max_sales: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    vxYZPQ==
+  store_product_count: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    HUQOOw==
+  store_sales_volatility: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    NtBdOw==
+  temp_hour_interaction: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    AAAAAA==
+  third_category_id: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    0jrUOg==
+  unmet_demand: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    AAAAAA==
+  week_of_year: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    5dnrOw==
+model_config:
+  colsample_bytree: 0.8
+  learning_rate: 0.1
+  max_depth: 5
+  n_estimators: 200
+  subsample: 0.8
+model_name: XGBoost
+n_eval_samples: 35000
+n_features: 84
+n_train_samples: 450000
+train_metrics:
+  Bias: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id001
+  - !!binary |
+    nhkAc7sQVz8=
+  Bias_Percentage: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id001
+  - !!binary |
+    4c+roxEgwj8=
+  MAE: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id001
+  - !!binary |
+    LA5bNr5pyD8=
+  MAPE: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id001
+  - !!binary |
+    aSbX4biKiUE=
+  RMSE: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id001
+  - !!binary |
+    PAtXPYnu0z8=
+  sMAPE: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id001
+  - !!binary |
+    dneEr0QvPUA=
+training_time_seconds: 7.149549

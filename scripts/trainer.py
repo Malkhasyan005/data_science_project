@@ -9,6 +9,7 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.linear_model import LinearRegression, Ridge, Lasso
 from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
 from sklearn.metrics import make_scorer, mean_absolute_error
+import xgboost as xgb
 
 
 from src.data_processing.data_loader import FreshRetailDataLoader
@@ -57,6 +58,7 @@ def main(config_path="config/config.yaml", selected_model=None):
         "lasso": Lasso(max_iter=5000),
         "random_forest": RandomForestRegressor(random_state=config["training"]["random_state"]),
         "gradient_boosting": GradientBoostingRegressor(random_state=config["training"]["random_state"]),
+        "xg_boost": xgb.XGBRegressor(random_state=config["training"]["random_state"], n_jobs=-1)
     }
 
     param_grids = {
@@ -69,6 +71,13 @@ def main(config_path="config/config.yaml", selected_model=None):
             "model__learning_rate": [0.01, 0.1],
             "model__max_depth": [3, 5],
         },
+        'xg_boost': {
+            'model__n_estimators': [100, 200],
+            'model__learning_rate': [0.01, 0.1],
+            'model__max_depth': [3, 5],
+            'model__subsample': [0.8, 1.0],
+            'model__colsample_bytree': [0.8, 1.0]
+        }
     }
 
     # Filter for selected model if provided

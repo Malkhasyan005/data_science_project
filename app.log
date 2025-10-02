@@ -792,3 +792,108 @@
 2025-10-02 19:40:45,136 - INFO -   Evaluation RMSE: 0.3824
 2025-10-02 19:40:45,136 - INFO -   Evaluation MAPE: 48244803.17%
 2025-10-02 19:40:45,136 - INFO -   Model Bias: -0.0090
+2025-10-02 19:55:11,039 - INFO - Starting experiment: baseline_xg_boost_20251002_195511
+2025-10-02 19:55:11,039 - INFO - Model: xg_boost
+2025-10-02 19:55:11,039 - INFO - Configuration: config/config.yaml
+2025-10-02 19:55:11,039 - INFO - Loading data...
+2025-10-02 19:55:18,937 - INFO - Successfully loaded:
+2025-10-02 19:55:18,937 - INFO -   Training samples: 450,000
+2025-10-02 19:55:18,937 - INFO -   Evaluation samples: 35,000
+2025-10-02 19:55:19,877 - INFO - Data Summary:
+2025-10-02 19:55:19,878 - INFO -   dataset_shape: {'train': (450000, 19)}
+2025-10-02 19:55:19,878 - INFO -   time_span: {'start': '2024-03-28 00:00:00', 'end': '2024-06-25 00:00:00', 'duration_days': 89}
+2025-10-02 19:55:19,878 - INFO -   business_dimensions: {'unique_stores': 898, 'unique_products': 865, 'unique_cities': 18, 'total_store_product_combinations': 49997}
+2025-10-02 19:55:19,878 - INFO -   target_statistics: {'mean_sales': np.float64(0.9941817888888888), 'median_sales': np.float64(0.7), 'zero_sales_percentage': np.float64(4.454666666666666), 'max_sales': np.float64(40.4)}
+2025-10-02 19:55:19,878 - INFO -   stockout_analysis: {'total_observations': 450000, 'stockout_hours': np.int64(0), 'stockout_rate_percent': np.float64(0.0), 'stores_with_stockouts': 0}
+2025-10-02 19:55:19,878 - INFO -   data_quality: {'missing_values': {'city_id': 0, 'store_id': 0, 'management_group_id': 0, 'first_category_id': 0, 'second_category_id': 0, 'third_category_id': 0, 'product_id': 0, 'dt': 0, 'sale_amount': 0, 'hours_sale': 0, 'stock_hour6_22_cnt': 0, 'hours_stock_status': 0, 'discount': 0, 'holiday_flag': 0, 'activity_flag': 0, 'precpt': 0, 'avg_temperature': 0, 'avg_humidity': 0, 'avg_wind_level': 0}, 'duplicate_rows': np.int64(0)}
+2025-10-02 19:55:19,878 - INFO - Starting feature engineering...
+2025-10-02 19:55:19,878 - INFO - Starting comprehensive feature engineering pipeline...
+2025-10-02 19:55:19,898 - INFO - Creating temporal features...
+2025-10-02 19:55:20,933 - INFO - Created 53 total features
+2025-10-02 19:55:21,008 - INFO - Creating categorical and interaction features...
+2025-10-02 19:55:21,585 - INFO - Creating lag features for periods: [1, 2, 3, 7, 14, 21]
+2025-10-02 19:55:21,850 - INFO - Creating rolling features for windows: [6, 24, 168]
+2025-10-02 19:55:31,978 - INFO - Creating interaction features...
+2025-10-02 19:55:31,987 - INFO - Feature engineering complete: 19 → 89 features (+70)
+2025-10-02 19:55:31,987 - INFO - Starting comprehensive feature engineering pipeline...
+2025-10-02 19:55:31,993 - INFO - Creating temporal features...
+2025-10-02 19:55:32,080 - INFO - Created 53 total features
+2025-10-02 19:55:32,085 - INFO - Creating categorical and interaction features...
+2025-10-02 19:55:32,122 - INFO - Creating lag features for periods: [1, 2, 3, 7, 14, 21]
+2025-10-02 19:55:32,145 - INFO - Creating rolling features for windows: [6, 24, 168]
+2025-10-02 19:55:36,811 - INFO - Creating interaction features...
+2025-10-02 19:55:36,813 - INFO - Feature engineering complete: 19 → 89 features (+70)
+2025-10-02 19:55:36,813 - INFO - Feature engineering complete. Features: 89
+2025-10-02 19:55:36,822 - INFO - Using 84 features for training
+2025-10-02 19:55:36,822 - INFO - Feature sample: ['management_group_id', 'first_category_id', 'second_category_id', 'third_category_id', 'hours_sale', 'stock_hour6_22_cnt', 'hours_stock_status', 'discount', 'holiday_flag', 'activity_flag']...
+2025-10-02 19:55:36,873 - INFO - Training data shape: (450000, 84)
+2025-10-02 19:55:36,874 - INFO - Evaluation data shape: (35000, 84)
+2025-10-02 19:55:36,874 - INFO - Training XGBoost...
+2025-10-02 19:55:37,294 - WARNING - Features with >50% missing values: ['sale_amount_lag_7', 'stockout_lag_7', 'sale_amount_lag_14', 'sale_amount_lag_21']
+2025-10-02 19:55:37,456 - WARNING - Dropped non-numeric columns: ['hours_sale', 'day_part']
+2025-10-02 19:55:37,456 - INFO - Fitting XGBoost with 82 features...
+2025-10-02 19:55:44,021 - INFO - Training completed. R² score: 0.9492
+2025-10-02 19:55:44,023 - INFO - Training completed in 7.15 seconds
+2025-10-02 19:55:44,023 - INFO - Generating predictions...
+2025-10-02 19:55:45,313 - INFO - Evaluating model performance...
+2025-10-02 19:55:45,321 - INFO - Training Metrics:
+2025-10-02 19:55:45,321 - INFO -   MAE: 0.1907
+2025-10-02 19:55:45,321 - INFO -   RMSE: 0.3114
+2025-10-02 19:55:45,321 - INFO -   MAPE: 53565212.2301
+2025-10-02 19:55:45,321 - INFO -   sMAPE: 29.1846
+2025-10-02 19:55:45,321 - INFO -   Bias: 0.0014
+2025-10-02 19:55:45,321 - INFO -   Bias_Percentage: 0.1416
+2025-10-02 19:55:45,325 - INFO - Evaluation Metrics:
+2025-10-02 19:55:45,325 - INFO -   MAE: 0.1146
+2025-10-02 19:55:45,325 - INFO -   RMSE: 0.7242
+2025-10-02 19:55:45,326 - INFO -   MAPE: 12075085.8856
+2025-10-02 19:55:45,326 - INFO -   sMAPE: 12.5070
+2025-10-02 19:55:45,326 - INFO -   Bias: -0.0577
+2025-10-02 19:55:45,326 - INFO -   Bias_Percentage: -4.8030
+2025-10-02 19:55:45,326 - INFO -   MASE: nan
+2025-10-02 19:55:45,327 - INFO - Top 10 Most Important Features:
+2025-10-02 19:55:45,327 - INFO -   sale_amount_rolling_mean_6: 0.3264
+2025-10-02 19:55:45,327 - INFO -   sale_amount_rolling_mean_168: 0.2264
+2025-10-02 19:55:45,327 - INFO -   sale_amount_rolling_mean_24: 0.0814
+2025-10-02 19:55:45,327 - INFO -   product_avg_sales: 0.0646
+2025-10-02 19:55:45,327 - INFO -   store_max_sales: 0.0374
+2025-10-02 19:55:45,327 - INFO -   product_sales_volatility: 0.0352
+2025-10-02 19:55:45,327 - INFO -   sale_amount_rolling_max_6: 0.0227
+2025-10-02 19:55:45,327 - INFO -   holiday_flag: 0.0171
+2025-10-02 19:55:45,327 - INFO -   sale_amount_rolling_std_168: 0.0166
+2025-10-02 19:55:45,327 - INFO -   stock_hour6_22_cnt: 0.0152
+2025-10-02 19:55:45,344 - INFO - Model XGBoost saved to models/trained/baseline_xg_boost_20251002_195511_20251002_195545.joblib
+2025-10-02 19:55:45,382 - INFO - Model saved to: models/trained/baseline_xg_boost_20251002_195511_20251002_195545.joblib
+2025-10-02 19:55:45,383 - INFO - Results saved to: models/trained/baseline_xg_boost_20251002_195511_20251002_195545_results.yaml
+2025-10-02 19:55:45,383 - INFO - Experiment completed successfully!
+2025-10-02 19:55:45,383 - INFO - Key Results:
+2025-10-02 19:55:45,383 - INFO -   Evaluation MAE: 0.1146
+2025-10-02 19:55:45,384 - INFO -   Evaluation RMSE: 0.7242
+2025-10-02 19:55:45,384 - INFO -   Evaluation MAPE: 12075085.89%
+2025-10-02 19:55:45,384 - INFO -   Model Bias: -0.0577
+2025-10-02 19:58:09,565 - INFO - Successfully loaded:
+2025-10-02 19:58:09,565 - INFO -   Training samples: 450,000
+2025-10-02 19:58:09,565 - INFO -   Evaluation samples: 35,000
+2025-10-02 19:58:09,565 - INFO - Starting comprehensive feature engineering pipeline...
+2025-10-02 19:58:09,585 - INFO - Creating temporal features...
+2025-10-02 19:58:10,635 - INFO - Created 53 total features
+2025-10-02 19:58:10,757 - INFO - Creating categorical and interaction features...
+2025-10-02 19:58:11,343 - INFO - Creating lag features for periods: [1, 2, 3, 7, 14, 21]
+2025-10-02 19:58:11,636 - INFO - Creating rolling features for windows: [6, 24, 168]
+2025-10-02 19:58:22,008 - INFO - Creating interaction features...
+2025-10-02 19:58:22,018 - INFO - Feature engineering complete: 19 → 89 features (+70)
+2025-10-02 19:58:22,119 - INFO - Running GridSearchCV for xg_boost...
+2025-10-02 20:00:41,798 - INFO - Successfully loaded:
+2025-10-02 20:00:41,798 - INFO -   Training samples: 45,000
+2025-10-02 20:00:41,798 - INFO -   Evaluation samples: 3,500
+2025-10-02 20:00:41,798 - INFO - Starting comprehensive feature engineering pipeline...
+2025-10-02 20:00:41,805 - INFO - Creating temporal features...
+2025-10-02 20:00:41,917 - INFO - Created 53 total features
+2025-10-02 20:00:41,923 - INFO - Creating categorical and interaction features...
+2025-10-02 20:00:41,979 - INFO - Creating lag features for periods: [1, 2, 3, 7, 14, 21]
+2025-10-02 20:00:42,011 - INFO - Creating rolling features for windows: [6, 24, 168]
+2025-10-02 20:00:47,238 - INFO - Creating interaction features...
+2025-10-02 20:00:47,240 - INFO - Feature engineering complete: 19 → 89 features (+70)
+2025-10-02 20:00:47,248 - INFO - Running GridSearchCV for xg_boost...
+2025-10-02 20:01:12,188 - INFO - xg_boost best MAE: 0.0329 with params {'model__colsample_bytree': 1.0, 'model__learning_rate': 0.1, 'model__max_depth': 5, 'model__n_estimators': 200, 'model__subsample': 1.0}
+2025-10-02 20:01:12,204 - INFO - Updated config/config.yaml with best parameters for selected model(s)

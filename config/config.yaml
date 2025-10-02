@@ -3,7 +3,7 @@ data:
   dataset_eval: /home/karen/data_science_project/data/row/eval.csv
   target_column: sale_amount
   datetime_column: dt
-  fracture: 0.1
+  fracture: 0.01
 
 preprocessing:
   # Feature engineering configuration
@@ -29,6 +29,12 @@ models:
       n_estimators: 200
       learning_rate: 0.1
       max_depth: 5
+    xg_boost:
+      n_estimators: 200
+      learning_rate: 0.1
+      max_depth: 5
+      subsample: 1.0
+      colsample_bytree: 1.0
 
 
   advanced:

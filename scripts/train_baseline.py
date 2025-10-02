@@ -17,6 +17,7 @@ from src.models.baseline.linear_models import LinearForecastingModel
 from src.models.baseline.tree_models import TreeForecastingModel
 from src.models.baseline.naive_models import NaiveForecaster
 from src.evaluation.metrics import ForecastingMetrics
+from src.models.baseline.xgboost_model import XGBoostForecastingModel
 # from src.training.trainer import ModelTrainer
 
 # Configure logging
@@ -33,7 +34,7 @@ def parse_arguments():
     parser.add_argument(
         '--model',
         type=str,
-        choices=['naive', 'linear', 'ridge', 'lasso', 'random_forest', 'gradient_boosting'],
+        choices=['naive', 'linear', 'ridge', 'lasso', 'random_forest', 'gradient_boosting', 'xg_boost'],
         default='linear',
         help='Model type to train'
     )
@@ -129,6 +130,10 @@ def create_model(model_name: str, config: Dict):
     elif model_name in ['random_forest', 'gradient_boosting']:
         return TreeForecastingModel(
             model_type=model_name,
+            config=model_config.get(model_name, {})
+        )
+    elif model_name == 'xg_boost':
+        return XGBoostForecastingModel(
             config=model_config.get(model_name, {})
         )
     
