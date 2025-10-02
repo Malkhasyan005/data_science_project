@@ -111,3 +111,32 @@ class FreshRetailDataLoader:
         }
         
         return summary
+    
+    def expanded_data(self):
+        if self.train_data is None:
+            raise ValueError("Data not loaded. Call load_data() first.")
+        expanded = self.train_data.copy()
+        # Convert hours_sale column
+        new_hours_sale = []
+        for val in expanded["hours_sale"]:
+            val = str(val).replace(",", " ").replace("[", "").replace("]", "").strip()
+            val_list = [float(x) for x in val.split() if x != ""]
+            new_hours_sale.append(val_list)
+        expanded["hours_sale"] = new_hours_sale
+        # Convert hours_stock_status column
+        new_hours_stock = []
+        for val in expanded["hours_stock_status"]:
+            val = str(val).replace(",", " ").replace("[", "").replace("]", "").strip()
+            val_list = [int(float(x)) for x in val.split() if x != ""]
+            new_hours_stock.append(val_list)
+        expanded["hours_stock_status"] = new_hours_stock
+        # Explode to hourly rows
+        expanded = expanded.explode(["hours_sale", "hours_stock_status"]).reset_index(drop=True)
+        # Add hour index
+        expanded["hour"] = expanded.groupby(["store_id", "product_id", "dt"]).cumcount()
+        # Rename columns
+        expanded = expanded.rename(columns={
+            "hours_sale": "sale_amount_hour",
+            "hours_stock_status": "stock_status_hour"
+        })
+        return expanded

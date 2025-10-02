@@ -1,5 +1,3 @@
-import sys
-sys.path.append("/home/karen/data_science_project")
 import argparse
 import yaml
 import logging
@@ -125,13 +123,13 @@ def create_model(model_name: str, config: Dict):
     elif model_name in ['linear', 'ridge', 'lasso']:
         return LinearForecastingModel(
             model_type=model_name,
-            config=model_config.get('linear_regression', {})
+            config=model_config.get(model_name, {})
         )
     
     elif model_name in ['random_forest', 'gradient_boosting']:
         return TreeForecastingModel(
             model_type=model_name,
-            config=model_config.get('random_forest', {})
+            config=model_config.get(model_name, {})
         )
     
     else:
@@ -153,13 +151,19 @@ def train_and_evaluate_model(model, train_data: pd.DataFrame, eval_data: pd.Data
     logger.info(f"Using {len(feature_cols)} features for training")
     logger.info(f"Feature sample: {feature_cols[:10]}...")
     
-    # Prepare training data
-    X_train = train_data[feature_cols]
-    y_train = train_data[target_col]
-    
-    # Prepare evaluation data
-    X_eval = eval_data[feature_cols]
-    y_eval = eval_data[target_col]
+    if isinstance(model, NaiveForecaster):
+        # Naive needs identifiers + dt
+        X_train = train_data.drop(columns=[target_col])
+        y_train = train_data[target_col]
+        X_eval = eval_data.drop(columns=[target_col])
+        y_eval = eval_data[target_col]
+    else:
+        # Regular models use engineered features
+        feature_cols = [col for col in train_data.columns if col not in metadata_cols]
+        X_train = train_data[feature_cols]
+        y_train = train_data[target_col]
+        X_eval = eval_data[feature_cols]
+        y_eval = eval_data[target_col]
     
     logger.info(f"Training data shape: {X_train.shape}")
     logger.info(f"Evaluation data shape: {X_eval.shape}")

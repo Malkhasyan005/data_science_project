@@ -27,10 +27,7 @@ class FeatureEngineer:
         
     def create_temporal_features(self, df: pd.DataFrame, datetime_col: str = 'dt') -> pd.DataFrame:
         """
-        Create comprehensive time-based features.
-        
-        Teaching insight: Time-based features are crucial for retail forecasting
-        because demand patterns are highly temporal (hourly, daily, weekly cycles).
+        Create comprehensive time-based features, including Fourier seasonality.
         """
         df = df.copy()
         
@@ -40,17 +37,14 @@ class FeatureEngineer:
         logger.info("Creating temporal features...")
         
         # Basic temporal components
-        # These capture different levels of seasonality
         df['hour'] = df[datetime_col].dt.hour
-        df['day_of_week'] = df[datetime_col].dt.dayofweek  # 0=Monday, 6=Sunday
+        df['day_of_week'] = df[datetime_col].dt.dayofweek  # 0=Monday
         df['day_of_month'] = df[datetime_col].dt.day
         df['month'] = df[datetime_col].dt.month
         df['quarter'] = df[datetime_col].dt.quarter
         df['week_of_year'] = df[datetime_col].dt.isocalendar().week
         
-        # Cyclical encoding - This is a key teaching moment!
-        # Linear encoding (hour=23, hour=0) suggests these times are very different
-        # Cyclical encoding correctly represents that 23:00 and 01:00 are close
+        # Cyclical encoding
         df['hour_sin'] = np.sin(2 * np.pi * df['hour'] / 24)
         df['hour_cos'] = np.cos(2 * np.pi * df['hour'] / 24)
         df['day_of_week_sin'] = np.sin(2 * np.pi * df['day_of_week'] / 7)
@@ -62,18 +56,40 @@ class FeatureEngineer:
         df['is_weekend'] = (df['day_of_week'] >= 5).astype(int)
         df['is_weekday'] = (df['day_of_week'] < 5).astype(int)
         
-        # Retail-specific time periods (teaching: domain knowledge matters!)
+        # Retail-specific time periods
         df['is_morning_rush'] = ((df['hour'] >= 7) & (df['hour'] <= 9)).astype(int)
         df['is_lunch_time'] = ((df['hour'] >= 11) & (df['hour'] <= 14)).astype(int)
         df['is_evening_rush'] = ((df['hour'] >= 17) & (df['hour'] <= 20)).astype(int)
         df['is_late_night'] = ((df['hour'] >= 22) | (df['hour'] <= 5)).astype(int)
+
+        # Day part bins
+        df['day_part'] = pd.cut(
+            df['hour'],
+            bins=[0,6,11,17,22,24],
+            labels=['night','morning','afternoon','evening','late'],
+            right=False
+        )
+
+        # Holidays
+        df['is_holiday'] = df['dt'].dt.strftime("%m-%d").isin(["05-27", "06-19"]).astype(int)
         
-        # Time since start of dataset (trend component)
+        # Time since start
         df['days_since_start'] = (df[datetime_col] - df[datetime_col].min()).dt.days
         df['hours_since_start'] = (df[datetime_col] - df[datetime_col].min()).dt.total_seconds() / 3600
         
-        logger.info(f"Created {len([c for c in df.columns if c not in df.columns[:20]])} temporal features")
+        # Fourier seasonality
+        t = np.arange(len(df))
+        for k in range(1, 4):  # order=3
+            # Daily cycle
+            df[f'fourier_sin_24_{k}'] = np.sin(2 * np.pi * k * t / 24)
+            df[f'fourier_cos_24_{k}'] = np.cos(2 * np.pi * k * t / 24)
+            # Weekly cycle
+            df[f'fourier_sin_168_{k}'] = np.sin(2 * np.pi * k * t / 168)
+            df[f'fourier_cos_168_{k}'] = np.cos(2 * np.pi * k * t / 168)
+        
+        logger.info(f"Created {df.shape[1]} total features")
         return df
+
     
     def create_lag_features(self, df: pd.DataFrame, target_col: str = 'sale_amount') -> pd.DataFrame:
         """
@@ -86,6 +102,10 @@ class FeatureEngineer:
         
         # Sort data properly for lag calculation
         df = df.sort_values(['store_id', 'product_id', 'dt']).reset_index(drop=True)
+
+        # Ensure stock_status is numeric (fix for your bug)
+        df['hours_stock_status'] = pd.to_numeric(df['hours_stock_status'], errors='coerce').fillna(0).astype(int)
+
         
         logger.info(f"Creating lag features for periods: {self.lag_periods}")
         
@@ -100,6 +120,8 @@ class FeatureEngineer:
             if lag <= 7:  # Only short-term lags for stockout (memory constraints)
                 stockout_lag_col = f'stockout_lag_{lag}'
                 df[stockout_lag_col] = df.groupby(['store_id', 'product_id'])['hours_stock_status'].shift(lag)
+        df['unmet_demand'] = np.where((df['hours_stock_status'] == 1) & (df['sale_amount'] == 0) & (df['sale_amount_lag_1'] > 0),1, 0)
+
         
         return df
     
@@ -148,7 +170,11 @@ class FeatureEngineer:
                 .median()
                 .reset_index(level=[0, 1], drop=True)
             )
-        
+        df['stockout_ratio_7h'] = (
+            df.groupby(['store_id','product_id'])['hours_stock_status']
+            .rolling(window=7, min_periods=1).mean()
+            .reset_index(level=[0,1], drop=True))
+
         return df
     
     def create_categorical_features(self, df: pd.DataFrame) -> pd.DataFrame:
@@ -168,10 +194,8 @@ class FeatureEngineer:
             'product_id': 'nunique'  # Number of products per store
         }).round(2)
         
-
         store_stats.columns = ['store_avg_sales', 'store_sales_volatility', 'store_max_sales', 'store_product_count']
         df = df.merge(store_stats, on='store_id', how='left')
-
         
         # Product-level aggregations (product characteristics)
         product_stats = df.groupby('product_id').agg({
@@ -179,24 +203,9 @@ class FeatureEngineer:
             'store_id': 'nunique'  # Number of stores selling this product
         }).round(2)
         
-        
         product_stats.columns = ['product_avg_sales', 'product_sales_volatility', 'product_store_count']
         df = df.merge(product_stats, on='product_id', how='left')
-
         
-        # # City-level features (regional effects)
-        # city_stats = df.groupby('city_id').agg({
-        #     'sale_amount': 'mean',
-        #     'hours_stock_status': 'mean'  # Average stock availability by city
-        # }).round(2)
-
-        # logger.info("third Groupby Done...")
-        
-        # city_stats.columns = ['city_avg_sales', 'city_stock_availability']
-        # df = df.merge(city_stats, on='city_id', how='left')
-        
-        # logger.info("Merge Done...")
-
         return df
     
     def create_interaction_features(self, df: pd.DataFrame) -> pd.DataFrame:
@@ -223,6 +232,8 @@ class FeatureEngineer:
         
         return df
     
+
+
     def engineer_all_features(self, df: pd.DataFrame) -> pd.DataFrame:
         """
         Apply all feature engineering steps in the correct order.
@@ -248,7 +259,8 @@ class FeatureEngineer:
         
         # Step 5: Interaction features (these depend on base features existing)
         df = self.create_interaction_features(df)
-        
+
+
         final_cols = len(df.columns)
         logger.info(f"Feature engineering complete: {original_cols} → {final_cols} features (+{final_cols - original_cols})")
         

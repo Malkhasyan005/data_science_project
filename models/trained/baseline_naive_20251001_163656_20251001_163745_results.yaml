@@ -1,0 +1,75 @@
+eval_metrics:
+  Bias: !!python/object/apply:numpy._core.multiarray.scalar
+  - &id001 !!python/object/apply:numpy.dtype
+    args:
+    - f8
+    - false
+    - true
+    state: !!python/tuple
+    - 3
+    - <
+    - null
+    - null
+    - null
+    - -1
+    - -1
+    - 0
+  - !!binary |
+    zV1DFkGvyb8=
+  Bias_Percentage: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id001
+  - !!binary |
+    S79aurO3MMA=
+  MAE: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id001
+  - !!binary |
+    8tkokbpQ4j8=
+  MAPE: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id001
+  - !!binary |
+    PLFLd5SvtUE=
+  MASE: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id001
+  - !!binary |
+    AAAAAAAA+P8=
+  RMSE: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id001
+  - !!binary |
+    s8N7RdLc8j8=
+  sMAPE: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id001
+  - !!binary |
+    M8Gw1yE8S0A=
+feature_importance: null
+model_config:
+  seasonal_period: 24
+model_name: Naive_seasonal
+n_eval_samples: 35000
+n_features: 68
+n_train_samples: 450000
+train_metrics:
+  Bias: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id001
+  - !!binary |
+    d6n+LlkCJrw=
+  Bias_Percentage: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id001
+  - !!binary |
+    G2YDZphLkbw=
+  MAE: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id001
+  - !!binary |
+    ndqN02Lg2D8=
+  MAPE: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id001
+  - !!binary |
+    dmMrRX+tskE=
+  RMSE: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id001
+  - !!binary |
+    rFL51Msu6D8=
+  sMAPE: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id001
+  - !!binary |
+    omUeGMdAR0A=
+training_time_seconds: 10.375576
